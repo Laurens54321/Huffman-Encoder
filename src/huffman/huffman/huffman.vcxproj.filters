@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{0799e6b4-7834-4cfc-9522-e062eb7edcae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{81b41093-635b-4b19-a51c-d81c4a4efeba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="catch.hpp">
@@ -20,6 +26,15 @@
     </ClInclude>
     <ClInclude Include="easylogging++.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="frequency-table.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="binary-tree.h">
+      <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,10 +48,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\tests.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="tests\example-tests.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="type-selection-tests.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

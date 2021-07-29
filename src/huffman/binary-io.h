@@ -5,8 +5,7 @@
 
 namespace io {
     	u64 read_bits(unsigned nbits, io::InputStream& input);
-    void write_bits(u64 value, unsigned nbits, io::OutputStream& output);
-
+		void write_bits(u64 value, unsigned nbits, io::OutputStream& output);
 }
 
 

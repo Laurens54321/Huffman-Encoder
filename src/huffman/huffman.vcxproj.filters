@@ -66,6 +66,12 @@
     <ClInclude Include="eof-encoding.h">
       <Filter>encoding</Filter>
     </ClInclude>
+    <ClInclude Include="bit-grouper.h">
+      <Filter>encoding</Filter>
+    </ClInclude>
+    <ClInclude Include="encoding-combiner.h">
+      <Filter>encoding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cc">
@@ -90,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="eof-encoding.cpp">
+      <Filter>encoding</Filter>
+    </ClCompile>
+    <ClCompile Include="bit-grouper.cpp">
       <Filter>encoding</Filter>
     </ClCompile>
   </ItemGroup>

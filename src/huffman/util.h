@@ -7,7 +7,7 @@ typedef uint64_t u64;
 typedef uint64_t Datum;
 // Contents
 
-constexpr unsigned bits_needed(u64 domain_size)
+constexpr u64 bits_needed(u64 domain_size)
 {
     domain_size -= 1;
     u64 bits_needed = 0;
@@ -18,7 +18,7 @@ constexpr unsigned bits_needed(u64 domain_size)
     return bits_needed;
 }
 
-constexpr unsigned bytes_needed(u64 domain_size)
+constexpr u64 bytes_needed(u64 domain_size)
 {
     domain_size -= 1;
     u64 bits_needed = 0;

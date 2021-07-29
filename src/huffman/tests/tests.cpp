@@ -18,6 +18,9 @@
 #include "io/memory-buffer.h"
 #include "io/streams.h"
 #include "eof-encoding.h"
+#include "bit-grouper.h"
+#include "encoding.h"
+#include "encoding-combiner.h"
 
 TEST_CASE("Passing test")
 {
@@ -92,7 +95,11 @@ void check(u64 n, unsigned nbits)
 
 TEST_CASE("inputoutputstream")
 {
-    check(64, 8);
+    check(55, 6);
+    check(63, 6);
+    check(111, 7);
+    check(127, 7);
+    check(2, 2);	
 }
 
 TEST_CASE("Memory buffer stream")
@@ -146,7 +153,50 @@ TEST_CASE("2 buffers | 3 values in | should end up at 4")
 	buffer1_20_encode.data()->push_back(2);
 	io::MemoryBuffer<21> buffer2_21_encode;
 	const auto test = encoding::eof_encoding<20>();
-	encode(buffer1_20_encode.source(), buffer2_21_encode.destination(), test);     REQUIRE(buffer1_20_encode.data()->size() == buffer2_21_encode.data()->size() - 1);
+    encoding::encode(buffer1_20_encode.source(), buffer2_21_encode.destination(), test);
+	REQUIRE(buffer1_20_encode.data()->size() == buffer2_21_encode.data()->size() - 1);
+}
+
+TEST_CASE("2 buffers | 4 bits in | should end up at 11")
+{
+    io::MemoryBuffer<2> bufferin;
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(0);
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(1);
+    io::MemoryBuffer<16> bufferout;
+    const auto test = encoding::bit_grouper<4>();
+    encoding::encode(bufferin.source(), bufferout.destination(), test);
+    //REQUIRE(bufferout.data()->size() == 1);
+    auto c = io::read_bits(4,*bufferout.source()->create_input_stream());
+    REQUIRE(c == 11);
+	
+}
+
+TEST_CASE("Combiner test")
+{
+    encoding::Encoding<2, 8> grouper = encoding::bit_grouper<3>();
+    encoding::Encoding<8, 9> eof = encoding::eof_encoding<8>();
+	
+
+    auto combined = grouper | eof ;
+
+    io::MemoryBuffer<2> bufferin;
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(0);
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(0);
+    bufferin.data()->push_back(1);
+    bufferin.data()->push_back(1);
+    io::MemoryBuffer<9> bufferout;
+
+	
+    encoding::encode(bufferin.source(), bufferout.destination(), *combined);
+    //REQUIRE(bufferout.data()->size() == 1);
+    auto c = io::read_bits(9, *bufferout.source()->create_input_stream());
+    REQUIRE(c == 11);
 }
 
 

@@ -1,4 +1,4 @@
-#include "encoding.h"
+
 #ifdef TEST_BUILD
 #define CATCH_CONFIG_MAIN
 /*
@@ -21,6 +21,10 @@
 #include "bit-grouper.h"
 #include "encoding.h"
 #include "encoding-combiner.h"
+
+#include <binary-tree.h>
+
+using namespace std;
 
 TEST_CASE("Passing test")
 {
@@ -76,10 +80,11 @@ TEST_CASE("FrequencyTable testing") {
 }
 
 TEST_CASE("Binary Tree testsing") {
-    data::Leaf<int> myleaf(0);
-    REQUIRE(myleaf.getValue() == 0);
-
-
+    data::Leaf<int> myleaf(9);
+    REQUIRE(myleaf.getValue() == 9);
+    data::Node<int> mynode = myleaf;
+    auto newLeaf = static_cast<const data::Leaf<int>&>(mynode);
+    REQUIRE(newLeaf.getValue() == 9);
 }
 
 void check(u64 n, unsigned nbits)
@@ -197,6 +202,16 @@ TEST_CASE("Combiner test")
     //REQUIRE(bufferout.data()->size() == 1);
     auto c = io::read_bits(9, *bufferout.source()->create_input_stream());
     REQUIRE(c == 11);
+}
+
+TEST_CASE("Tree encoding test") {
+	data::Branch root = data::Branch<Datum>(nullptr, nullptr);
+    REQUIRE(!root.isLeaf());
+
+   
+    
+
+	
 }
 
 

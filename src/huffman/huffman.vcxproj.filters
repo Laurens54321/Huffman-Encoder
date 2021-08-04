@@ -25,6 +25,9 @@
     <Filter Include="encoding">
       <UniqueIdentifier>{a622b21b-b372-4681-a63e-bb15578bf2b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="encoding\huffman">
+      <UniqueIdentifier>{678082e1-225e-4a4a-9a50-6bf5ac95c4c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="catch.hpp">
@@ -72,6 +75,9 @@
     <ClInclude Include="encoding-combiner.h">
       <Filter>encoding</Filter>
     </ClInclude>
+    <ClInclude Include="tree-encoding.h">
+      <Filter>encoding\huffman</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cc">
@@ -100,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="bit-grouper.cpp">
       <Filter>encoding</Filter>
+    </ClCompile>
+    <ClCompile Include="tree-encoding.cpp">
+      <Filter>encoding\huffman</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,7 +9,8 @@ namespace data {
 	template<typename T>
 	class Node {
 	public:
-		virtual ~Node() {};
+		virtual ~Node() {}
+		virtual bool isLeaf() const { return false; }
 	};
 
 	template<typename T>
@@ -21,18 +22,22 @@ namespace data {
 		Branch(std::unique_ptr<Node<T>> left_child, std::unique_ptr<Node<T>>_right_child)
 			: _left_child(std::move(left_child)), _right_child(std::move(_right_child)) { }
 
-		std::unique_ptr<Node<T>> getLeftChild() const { return _left_child; }
-		std::unique_ptr<Node<T>> getRightChild() const { return _right_child; }
+		const Node<T>& getLeftChild() const { return *_left_child; }
+		const Node<T>& getRightChild() const { return *_right_child; }
+
+		bool isLeaf() const override  { return false; }
 	};
 
 	template<typename T>
 	class Leaf : public Node<T> {
 	private:
 		T _value;
-
 	public:
 		Leaf(T value) :_value(value) {}
-		const T& getValue(){ return _value; }
+		//Leaf(Node<T> node) { }
+		const T& getValue() const { return _value; }
+
+		bool isLeaf() const override { return true; }
 	};
 
 	

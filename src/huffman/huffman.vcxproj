@@ -210,6 +210,7 @@
     <ClInclude Include="io\files.h" />
     <ClInclude Include="io\memory-buffer.h" />
     <ClInclude Include="io\streams.h" />
+    <ClInclude Include="tree-encoding.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\io.h" />
     <ClInclude Include="catch.hpp" />
@@ -226,6 +227,7 @@
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="tests\type-selection-tests.cpp" />
     <ClCompile Include="tests\tests.cpp" />
+    <ClCompile Include="tree-encoding.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

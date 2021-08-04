@@ -38,8 +38,8 @@ namespace encoding
 		}
 	};
 
-	template<u64 IN, u64 OUT>
-	void encode(io::DataSource<IN> data_source, io::DataDestination<OUT> data_destination, Encoding<IN, OUT> encoding)
+	template<u64 _IN, u64 _OUT>
+	void encode(io::DataSource<_IN> data_source, io::DataDestination<_OUT> data_destination, Encoding<_IN, _OUT> encoding)
 	{
 		auto input_stream = data_source->create_input_stream();
 		auto output_stream = data_destination->create_output_stream();
@@ -47,8 +47,8 @@ namespace encoding
 		encoding->encode(*input_stream, *output_stream);
 	}
 
-	template<u64 IN, u64 OUT>
-	void decode(io::DataSource<IN> data_source, io::DataDestination<OUT> data_destination, Encoding<OUT, IN> decoding)
+	template<u64 _IN, u64 _OUT>
+	void decode(io::DataSource<_IN> data_source, io::DataDestination<_OUT> data_destination, Encoding<_OUT, _IN> decoding)
 	{
 		io::InputStream& input_stream = data_source->create_input_stream();
 		io::OutputStream& output_stream = data_destination->create_output_stream();

@@ -7,7 +7,7 @@ namespace encoding
 {
 	namespace huffman	
 	{
-		void encoding::huffman::encode_tree(const data::Node<Datum>& root, Datum size, io::OutputStream& outputStream)
+		void encode_tree(const data::Node<Datum>& root, Datum size, io::OutputStream& outputStream)
 		{
 			
 			if (root.isLeaf())
@@ -26,7 +26,7 @@ namespace encoding
 			
 		}
 
-		std::unique_ptr<data::Node<Datum>> encoding::huffman::decode_tree(Datum nbits, io::InputStream& inputStream)
+		std::unique_ptr<data::Node<Datum>> decode_tree(Datum nbits, io::InputStream& inputStream)
 		{
 			if (inputStream.read() == 0)
 			{

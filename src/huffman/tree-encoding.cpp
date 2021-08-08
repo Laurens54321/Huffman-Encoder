@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "binary-io.h"
 #include "binary-tree.h"
 #include "util.h"
@@ -9,7 +11,6 @@ namespace encoding
 	{
 		void encode_tree(const data::Node<Datum>& root, Datum size, io::OutputStream& outputStream)
 		{
-			
 			if (root.isLeaf())
 			{
 				const data::Leaf<Datum>& leaf = dynamic_cast<const data::Leaf<Datum>&>(root);
@@ -23,7 +24,6 @@ namespace encoding
 				encode_tree(branch.getLeftChild(), size, outputStream);
 				encode_tree(branch.getRightChild(), size, outputStream);
 			}
-			
 		}
 
 		std::unique_ptr<data::Node<Datum>> decode_tree(Datum nbits, io::InputStream& inputStream)
@@ -31,6 +31,7 @@ namespace encoding
 			if (inputStream.read() == 0)
 			{
 				Datum data = io::read_bits(nbits, inputStream);
+				assert(data != 0);
 				return std::make_unique<data::Leaf<Datum>>(data);
 			}
 			else

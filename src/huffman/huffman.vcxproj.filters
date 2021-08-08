@@ -110,5 +110,8 @@
     <ClCompile Include="tree-encoding.cpp">
       <Filter>encoding\huffman</Filter>
     </ClCompile>
+    <ClCompile Include="huffman-encoding.cpp">
+      <Filter>encoding\huffman</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

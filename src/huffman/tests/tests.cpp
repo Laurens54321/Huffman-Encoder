@@ -1,4 +1,5 @@
 
+#include "tree-encoding.h"
 #ifdef TEST_BUILD
 #define CATCH_CONFIG_MAIN
 /*
@@ -83,7 +84,7 @@ TEST_CASE("Binary Tree testsing") {
     data::Leaf<int> myleaf(9);
     REQUIRE(myleaf.getValue() == 9);
     data::Node<int> mynode = myleaf;
-    auto newLeaf = static_cast<const data::Leaf<int>&>(mynode);
+    auto newLeaf = static_cast<data::Leaf<int>&>(mynode);
     REQUIRE(newLeaf.getValue() == 9);
 }
 
@@ -205,13 +206,19 @@ TEST_CASE("Combiner test")
 }
 
 TEST_CASE("Tree encoding test") {
-	data::Branch root = data::Branch<Datum>(nullptr, nullptr);
+    auto leftleaf = std::make_unique<data::Leaf<Datum>>(01);
+    auto middleleaf = std::make_unique<data::Leaf<Datum>>(11);
+    auto rightleaf = std::make_unique<data::Leaf<Datum>>(10);
+    auto rightBranch = std::make_unique<data::Branch<Datum>>(std::move(middleleaf), std::move(rightleaf));
+	const auto root = data::Branch<Datum>(std::move(leftleaf), std::move(rightBranch));
     REQUIRE(!root.isLeaf());
-
-   
-    
-
+    auto memorybuffer = io::MemoryBuffer<2, Datum>();
+    encoding::huffman::encode_tree(root, 2, *memorybuffer.destination()->create_output_stream());
+    auto outputnode = encoding::huffman::decode_tree(2, *memorybuffer.source()->create_input_stream());
+    std::unique_ptr<data::Branch<Datum>> branch = dynamic_cast<data::Branch<Datum>*>(outputnode);
+    REQUIRE(!branch->isLeaf());
 	
+    
 }
 
 

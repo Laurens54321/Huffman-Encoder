@@ -223,6 +223,7 @@
     <ClCompile Include="bit-grouper.cpp" />
     <ClCompile Include="easylogging++.cc" />
     <ClCompile Include="eof-encoding.cpp" />
+    <ClCompile Include="huffman-encoding.cpp" />
     <ClCompile Include="io\files.cpp" />
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="tests\type-selection-tests.cpp" />

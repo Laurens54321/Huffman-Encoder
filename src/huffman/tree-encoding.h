@@ -8,8 +8,8 @@ namespace encoding
 {
 	namespace huffman
 	{
-		void encode_tree(const data::Node<Datum> root, Datum size, io::OutputStream& outputStream);
-		bool test_encode(const data::Node<Datum> root);
+		void encode_tree(const data::Node<Datum>& root, Datum size, io::OutputStream& outputStream);
+		std::unique_ptr<data::Node<Datum>> decode_tree(Datum nbits, io::InputStream& inputStream);
 	}
 
 }

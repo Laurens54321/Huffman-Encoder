@@ -1,4 +1,4 @@
-
+#ifndef TEST_BUILD
 
 #include "bit-grouper.h"
 #include "encoding.h"
@@ -6,72 +6,86 @@
 #include "huffman-encoding.h"
 #include "encoding-combiner.h"
 #include "io/files.h"
-#ifndef TEST_BUILD
+
 
 /*
 *   This file is only active in non-test builds (i.e., builds where TEST_BUILD is not defined).
 */
 
 
-encoding::Encoding<256, 256> getEncoding(char* name)
+void compress(const std::string& file1, const std::string& file2)
 {
-    if (name == "huffman")
-    {
-        std::cout << "Huffman is running" << std::endl;
-    }
-
-
-
+    std::cout << "Compressing..." << std::endl;
     const auto eof = encoding::eof_encoding<256>();
     const auto huffman = encoding::huffman::huffman_encoding<257>();
     const auto grouper = encoding::bit_grouper<8>();
 
     const auto combined = eof | huffman | grouper;
-    return combined;
 
-
-
-
-    assert(false);
+    encode(io::create_file_data_source(file1), io::create_file_data_destination(file2), combined);
 }
 
-bool getEncodeDecode(char* text)
+void decompress(const std::string& file1, const std::string& file2)
 {
-    if (text == "decode") return true;
-    return false;
+    std::cout << "Decompressing..." << std::endl;
+    const auto eof = encoding::eof_encoding<256>();
+    const auto huffman = encoding::huffman::huffman_encoding<257>();
+    const auto grouper = encoding::bit_grouper<8>();
+
+    const auto combined = eof | huffman | grouper;
+
+    encoding::decode(io::create_file_data_source(file1), io::create_file_data_destination(file2), combined);
 }
 
-/*
-* This is the main entry point of your application.
-* Note that it will only work in non-test builds.
-*/
-int main(int argc, char* argv[], char* envp[])
+int main(const int argc, char* argv[])
 {
-#ifdef NDEBUG
-    std::cout << "You are running the release build" << std::endl;
-#else
-    std::cout << "You are running the debug build" << std::endl;
-#endif
-
-    bool numberLines = true;    
     for (int i = 0; argv[i] != NULL; ++i)
     {
-        if (numberLines)
-            std::cout << i << ": "; // Prefix with numbers if /n specified
-        std::cout << argv[i] << "\n";
+        
+        std::cout << i << ": " << argv[i] << "\n";
     }
 
-    const auto encoding = getEncoding(argv[1]);
-    const bool decode = getEncodeDecode(argv[2]);
-    const auto input = io::create_file_data_source(argv[3]);
-    const auto output = io::create_file_data_destination(argv[4]);
-    
-    if (!decode)
-        encoding::encode(input, output, encoding);
+
+	
+    std::string WrongArgument = "Wrong arguments. (method, input.type, output.type)";
+#ifdef NDEBUG
+    if (argc != 4)
+    {
+        std::cout << WrongArgument << std::endl;
+        return -1;
+    }
     else
-        encoding::decode(input, output, encoding);
+    {
+        const std::string function(argv[1]);
+        const std::string file1(argv[2]);
+        const std::string file2(argv[3]);
+        if (function == "compress")
+        {
+            compress(file1, file2);
+            std::cout << "File " + file1 + " compressed successfully to " + file2 + "!" << std::endl;
+            return 0;
+        }
+        else if (function == "decompress")
+        {
+            decompress(file1, file2);
+            std::cout << "File " + file1 + " decompressed successfully to " + file2 + "!" << std::endl;
+            return 0;
+        }
+        else if (function == "multi") {
+            auto tempfile = "temp.hf";
+        	compress(file1, tempfile);
+            std::cout << "File " + file1 + " compressed successfully to " + tempfile + "!" << std::endl;
+            decompress(tempfile, file2);
+            std::cout << "File " << tempfile << " decompressed successfully to " << file2 + "!" << std::endl;
+        }
+        else
+        {
+            std::cout << WrongArgument << std::endl;
+            return -1;
+        }
+    }
 }
-
-
+#else
+#endif
 
 #endif

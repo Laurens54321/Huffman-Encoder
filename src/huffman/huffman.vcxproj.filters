@@ -136,5 +136,8 @@
     <Text Include="text.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="input.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

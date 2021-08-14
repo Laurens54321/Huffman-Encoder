@@ -237,6 +237,7 @@
     <ClCompile Include="tree-encoding.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="input.txt" />
     <Text Include="text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

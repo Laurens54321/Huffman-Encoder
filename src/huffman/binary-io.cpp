@@ -1,4 +1,4 @@
-#include <string>
+ #include <string>
 #ifndef BINARYIO_CPP
 #define BINARYIO_CPP
 #include "binary-io.h"

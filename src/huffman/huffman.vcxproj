@@ -31,25 +31,25 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{89f07178-0f0b-44d0-bd6f-aae71a7b08a8}</ProjectGuid>
     <RootNamespace>huffman</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Testing|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -206,6 +206,7 @@
     <ClInclude Include="encoding-combiner.h" />
     <ClInclude Include="encoding.h" />
     <ClInclude Include="eof-encoding.h" />
+    <ClInclude Include="huffman-encoding.h" />
     <ClInclude Include="io\data-endpoints.h" />
     <ClInclude Include="io\files.h" />
     <ClInclude Include="io\memory-buffer.h" />
@@ -220,15 +221,23 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="binary-io.cpp" />
+    <ClCompile Include="binary-tree-tests.cpp" />
+    <ClCompile Include="bit-grouper-tests.cpp" />
     <ClCompile Include="bit-grouper.cpp" />
     <ClCompile Include="easylogging++.cc" />
+    <ClCompile Include="encoding-tests.cpp" />
     <ClCompile Include="eof-encoding.cpp" />
     <ClCompile Include="huffman-encoding.cpp" />
+    <ClCompile Include="huffman-tests.cpp" />
     <ClCompile Include="io\files.cpp" />
     <ClCompile Include="logging.cpp" />
+    <ClCompile Include="memorybuffer-tests.cpp" />
     <ClCompile Include="tests\type-selection-tests.cpp" />
     <ClCompile Include="tests\tests.cpp" />
     <ClCompile Include="tree-encoding.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -78,6 +78,9 @@
     <ClInclude Include="tree-encoding.h">
       <Filter>encoding\huffman</Filter>
     </ClInclude>
+    <ClInclude Include="huffman-encoding.h">
+      <Filter>encoding\huffman</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cc">
@@ -113,5 +116,25 @@
     <ClCompile Include="huffman-encoding.cpp">
       <Filter>encoding\huffman</Filter>
     </ClCompile>
+    <ClCompile Include="binary-tree-tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="memorybuffer-tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="bit-grouper-tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="encoding-tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman-tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="text.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

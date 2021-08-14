@@ -12,14 +12,20 @@ namespace
 
 		void encode(io::InputStream& inputStream, io::OutputStream& outputStream) override
 		{
-			u64 data = io::read_bits(_group_size, inputStream);
-			io::write_bits(data, _group_size, outputStream);
+			while (!inputStream.end_reached())
+			{
+				u64 data = io::read_bits(_group_size, inputStream);
+				outputStream.write(data);
+			}
 		}
 
 		void decode(io::InputStream& inputStream, io::OutputStream& outputStream) override
 		{
-			u64 data = io::read_bits(_group_size, inputStream);
-			io::write_bits(data, _group_size, outputStream);
+			while (!inputStream.end_reached())
+			{
+				u64 data = inputStream.read();
+				io::write_bits(data, _group_size, outputStream);
+			}
 		}
 	};
 

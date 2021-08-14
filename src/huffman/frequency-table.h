@@ -17,9 +17,7 @@ namespace data {
 	public:
 		void increment(const T& x)
 		{
-			if (freqTable.contains(x))
-				freqTable[x] = freqTable[x] + 1;
-			else freqTable[x] = 1;
+			++freqTable[x];
 		}
 
 		int operator[](const T& index)
@@ -37,6 +35,15 @@ namespace data {
 				keys.push_back(it.first);
 			}
 			return keys;
+		}
+
+		std::vector<std::pair<T, unsigned>> pairs()
+		{
+			std::vector<std::pair<T, unsigned>> pairs;
+			for (auto const& it : freqTable) {
+				pairs.push_back(std::pair<T, unsigned>(it.first, it.second));
+			}
+			return pairs;
 		}
 	};
 

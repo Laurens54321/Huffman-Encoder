@@ -14,6 +14,7 @@ namespace encoding
 {
 	class EncodingImplementation{
 	public:
+		virtual ~EncodingImplementation() = default;
 		// ~EncodingImplementation();
 	
 		virtual void encode(io::InputStream& inputStream, io::OutputStream& outputStream) { }
@@ -50,10 +51,10 @@ namespace encoding
 	template<u64 _IN, u64 _OUT>
 	void decode(io::DataSource<_IN> data_source, io::DataDestination<_OUT> data_destination, Encoding<_OUT, _IN> decoding)
 	{
-		io::InputStream& input_stream = data_source->create_input_stream();
-		io::OutputStream& output_stream = data_destination->create_output_stream();
+		auto input_stream = data_source->create_input_stream();
+		auto output_stream = data_destination->create_output_stream();
 
-		decoding->decode(input_stream, output_stream);
+		decoding->decode(*input_stream, *output_stream);
 	}
 }
 

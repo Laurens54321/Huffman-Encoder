@@ -15,7 +15,7 @@ namespace encoding
 			{
 				const data::Leaf<Datum>& leaf = dynamic_cast<const data::Leaf<Datum>&>(root);
 				outputStream.write(0);
-				io::write_bits(leaf.getValue(), 1, outputStream);
+				io::write_bits(leaf.getValue(), size, outputStream);
 			}
 			else
 			{
@@ -38,7 +38,7 @@ namespace encoding
 			{
 				std::unique_ptr<data::Node<Datum>> leftNode = decode_tree(nbits, inputStream);
 				std::unique_ptr<data::Node<Datum>> rightNode = decode_tree(nbits, inputStream);
-				return std::move(std::make_unique<data::Branch<Datum>>(std::move(leftNode), std::move(rightNode)));
+				return std::make_unique<data::Branch<Datum>>(std::move(leftNode), std::move(rightNode));
 			}			
 		}	
 	}

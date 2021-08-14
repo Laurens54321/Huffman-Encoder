@@ -1,5 +1,8 @@
 #include "encoding.h"
 #include "eof-encoding.h"
+
+#include <cassert>
+
 #include "util.h"
 
 
@@ -23,6 +26,7 @@ namespace {
 
 		void decode(io::InputStream& inputStream, io::OutputStream& outputStream) override
 		{
+			assert(!inputStream.end_reached());
 			while (!inputStream.end_reached())
 			{
 				Datum input = inputStream.read();

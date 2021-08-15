@@ -28,6 +28,9 @@
     <Filter Include="encoding\huffman">
       <UniqueIdentifier>{678082e1-225e-4a4a-9a50-6bf5ac95c4c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_datainput">
+      <UniqueIdentifier>{0939d2af-95fa-4ce2-ab84-24acd0d25dd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="catch.hpp">
@@ -133,11 +136,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="text.txt">
-      <Filter>Source Files</Filter>
-    </Text>
     <Text Include="input.txt">
-      <Filter>Source Files</Filter>
+      <Filter>_datainput</Filter>
     </Text>
+    <Text Include="text.txt">
+      <Filter>_datainput</Filter>
+    </Text>
+    <Text Include="output.txt">
+      <Filter>_datainput</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="text.hf">
+      <Filter>_datainput</Filter>
+    </None>
   </ItemGroup>
 </Project>

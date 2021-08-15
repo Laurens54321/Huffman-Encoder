@@ -12,8 +12,8 @@
 
 namespace 
 {
-		/*
-	int weight(data::Node<std::pair<Datum, unsigned>>& tree)
+		
+	int weight(const data::Node<std::pair<Datum, unsigned>>& tree)
 	{
 		assert(&tree != nullptr);
 
@@ -28,7 +28,7 @@ namespace
 		int total_weight = 0;
 		auto& B = static_cast<const data::Branch<std::pair<Datum, unsigned>>&>(tree);
 
-		auto& left = B.getLeftChild();
+		const auto& left = B.getLeftChild();
 		if (&left != nullptr)
 			total_weight += weight(left);
 
@@ -39,7 +39,7 @@ namespace
 		assert(total_weight < 100);
 		return total_weight;
 	}
-	*/
+	/*
 
 	u64 weight(const data::Node<std::pair<Datum, unsigned>>& node)      //Szymon's weight functie, only use for emergencies
 	{
@@ -63,6 +63,7 @@ namespace
 		return weight_result;
 	}
 
+*/
 
 	struct {
 		bool operator()(const std::unique_ptr<data::Node<std::pair<Datum, unsigned>>>& a, const std::unique_ptr<data::Node<std::pair<Datum, unsigned>>>& b) const { return weight(*a) > weight(*b); }
